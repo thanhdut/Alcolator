@@ -33,7 +33,7 @@
                                 <rect key="frame" x="14" y="77" width="572" height="31"/>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="???" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uy7-2O-Cc3">
-                                <rect key="frame" x="286" y="153" width="568" height="29"/>
+                                <rect key="frame" x="16" y="153" width="568" height="29"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -47,6 +47,7 @@
                             <constraint firstItem="v5r-ef-00Y" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="DDF-sd-WMF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uy7-2O-Cc3" secondAttribute="trailing" constant="15" id="Dgj-sE-dn3"/>
                             <constraint firstItem="uy7-2O-Cc3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="GKV-O8-2pp"/>
+                            <constraint firstItem="CO1-yX-Nea" firstAttribute="width" secondItem="uy7-2O-Cc3" secondAttribute="width" id="ass-LM-O4Z"/>
                             <constraint firstItem="CO1-yX-Nea" firstAttribute="centerX" secondItem="UMe-XU-XZu" secondAttribute="centerX" constant="-47.5" id="cIM-2i-A0p"/>
                             <constraint firstItem="CO1-yX-Nea" firstAttribute="top" secondItem="UMe-XU-XZu" secondAttribute="bottom" constant="8" id="eay-AK-bfY"/>
                             <constraint firstItem="uy7-2O-Cc3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fMz-Lm-Khw"/>
