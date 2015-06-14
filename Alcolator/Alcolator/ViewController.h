@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 
 - (void)buttonPressed:(UIButton *)sender;
+- (float)numberofGlassesForEquivalentAlcoholAmount;
 @end
 

@@ -31,9 +31,7 @@
         sender.text = nil;
     }
 }
-- (IBAction)sliderValueDidChange:(UISlider *)sender {
-    NSLog(@"Slider value changed to %f", sender.value);
-    [self.beerPercentTextField resignFirstResponder];
+-(float)numberofGlassesForEquivalentAlcoholAmount {
     // first, calculate how much alcohol is in all those beers...
     int numberOfBeers = self.beerCountSlider.value;
     int ouncesInOneBeerGlass = 12;  //assume they are 12oz beer bottles
@@ -44,45 +42,43 @@
     float ouncesInOneWineGlass = 5;  // wine glasses are usually 5oz
     float alcoholPercentageOfWine = 0.13;  // 13% is average
     float ouncesOfAlcoholPerWineGlass = ouncesInOneWineGlass * alcoholPercentageOfWine;
-    float numberOfWineGlassesForEquivalentAlcoholAmount = ouncesOfAlcoholTotal / ouncesOfAlcoholPerWineGlass;
+    return ouncesOfAlcoholTotal / ouncesOfAlcoholPerWineGlass;
+}
+- (IBAction)sliderValueDidChange:(UISlider *)sender {
+    NSLog(@"Slider value changed to %f", sender.value);
+    [self.beerPercentTextField resignFirstResponder];
+
     // decide whether to use "glass"/"glasses"
     NSString *wineText;
-    if (numberOfWineGlassesForEquivalentAlcoholAmount == 1) {
+    float numWineGlasses = self.numberofGlassesForEquivalentAlcoholAmount;
+    if (numWineGlasses == 1) {
         wineText = NSLocalizedString(@"glass", @"singular glass");
     } else {
         wineText = NSLocalizedString(@"glasses", @"plural of glass");
     }
     // update the navigation bar
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"Wine(%.0f %@)", nil),numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
+    self.title = [NSString stringWithFormat:NSLocalizedString(@"Wine(%.0f %@)", nil), numWineGlasses, wineText];
 }
 - (IBAction)buttonPressed:(UIButton *)sender {
     [self.beerPercentTextField resignFirstResponder];
-    // first, calculate how much alcohol is in all those beers...
-    int numberOfBeers = self.beerCountSlider.value;
-    int ouncesInOneBeerGlass = 12;  //assume they are 12oz beer bottles
-    float alcoholPercentageOfBeer = [self.beerPercentTextField.text floatValue] / 100;
-    float ouncesOfAlcoholPerBeer = ouncesInOneBeerGlass * alcoholPercentageOfBeer;
-    float ouncesOfAlcoholTotal = ouncesOfAlcoholPerBeer * numberOfBeers;
-    // now, calculate the equivalent amount of wine...
-    float ouncesInOneWineGlass = 5;  // wine glasses are usually 5oz
-    float alcoholPercentageOfWine = 0.13;  // 13% is average
-    float ouncesOfAlcoholPerWineGlass = ouncesInOneWineGlass * alcoholPercentageOfWine;
-    float numberOfWineGlassesForEquivalentAlcoholAmount = ouncesOfAlcoholTotal / ouncesOfAlcoholPerWineGlass;
     // decide whether to use "beer"/"beers" and "glass"/"glasses"
+    int numBeers = self.beerCountSlider.value;
+    float numWineGlasses = self.numberofGlassesForEquivalentAlcoholAmount;
     NSString *beerText;
-    if (numberOfBeers == 1) {
+    if (numBeers == 1) {
         beerText = NSLocalizedString(@"beer", @"singular beer");
     } else {
         beerText = NSLocalizedString(@"beers", @"plural of beer");
     }
     NSString *wineText;
-    if (numberOfWineGlassesForEquivalentAlcoholAmount == 1) {
+    if (numWineGlasses == 1) {
         wineText = NSLocalizedString(@"glass", @"singular glass");
     } else {
         wineText = NSLocalizedString(@"glasses", @"plural of glass");
     }
     // generate the result text, and display it on the label
-    NSString *resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ (with %.2f%% alcohol) contains as much alcohol as %.1f %@ of wine.", nil), numberOfBeers, beerText,  [self.beerPercentTextField.text floatValue], numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
+    NSString *resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ (with %.2f%% alcohol) contains as much alcohol as %.1f %@ of wine.", nil), numBeers
+, beerText,  [self.beerPercentTextField.text floatValue], numWineGlasses, wineText];
     self.resultLabel.text = resultText;
 }
 - (IBAction)tapGestureDidFire:(UITapGestureRecognizer *)sender {
