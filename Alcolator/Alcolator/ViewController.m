@@ -56,8 +56,9 @@
     } else {
         wineText = NSLocalizedString(@"glasses", @"plural of glass");
     }
-    // update the navigation bar
+    // update the tab bar & badge 
     self.title = [NSString stringWithFormat:NSLocalizedString(@"Wine(%.0f %@)", nil), numWineGlasses, wineText];
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) sender.value]];
 }
 - (IBAction)buttonPressed:(UIButton *)sender {
     [self.beerPercentTextField resignFirstResponder];

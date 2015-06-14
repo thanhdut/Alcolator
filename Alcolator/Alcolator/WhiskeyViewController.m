@@ -49,8 +49,9 @@
     } else {
         whiskeyText = NSLocalizedString(@"shots", @"plural of shot");
     }
-    // update the navigation bar
+    // update the tab bar & badge
     self.title = [NSString stringWithFormat:NSLocalizedString(@"Whiskey(%.0f %@)", nil),numWhiskeyGlasses, whiskeyText];
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) sender.value]];
 }
 - (void)buttonPressed:(UIButton *)sender;
 {
